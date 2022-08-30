@@ -1,13 +1,103 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.bgWhite {
+  border: none !important;
+}
+
+.bgCard {
+  background-color: #f7e6da !important ;
+}
+
+/* Button Auth */
+.btn-log {
+  background-color: white !important;
+  color: #613d2b !important;
+  width: 100px;
+  height: 40px;
+  font-weight: 600 !important;
+  border-color: #613d2b !important;
+  border: solid 3px #613d2b !important;
+}
+
+.btn-log:hover {
+  background-color: #613d2b !important;
+  color: white !important;
+}
+
+.btn-log:focus,
+.btn-log:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.btn-login {
+  background-color: #613d2b !important;
+  font-weight: 600 !important;
+  width: 100px;
+  height: 40px;
+  border-color: #613d2b !important;
+  border: solid 3px #613d2b !important;
+}
+
+.btn-login:focus,
+.btn-login:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.btn-login:hover {
+  background-color: white !important;
+  color: #613d2b !important;
+  border: solid 3px #613d2b !important;
+}
+
+.btn-authlogin {
+  background-color: #613d2b !important;
+  border-color: #613d2b !important;
+}
+
+.btn-authlogin:hover {
+  background-color: #895840 !important;
+  font-weight: bolder;
+  border-color: #613d2b !important;
+}
+
+.btn-authlogin:focus,
+.btn-authlogin:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+/* Btn Auth */
+
+.point {
+  cursor: pointer;
+}
+
+.text-login {
+  color: #613d2b !important;
+  font-weight: bolder;
+}
+
+.form-control:focus {
+  border-color: #895840 !important;
+  box-shadow: 0 0 0 0.2rem rgba(218, 139, 20, 0.25) !important;
+}
+
+.imageProduct:hover {
+  filter: brightness(150%) !important;
+}
+.imageHome:hover {
+  filter: brightness(120%) !important;
 }
