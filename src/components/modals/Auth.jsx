@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
+import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
+import { API } from "../../config/api";
+import { UserContext } from "../../context/useContext";
 
 export default function Auth() {
   const [show, setShow] = useState(false);
@@ -20,6 +24,55 @@ export default function Auth() {
     setShow(false);
   };
 
+  const [state, dispatch] = useContext(UserContext);
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = form;
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const navigate = useNavigate();
+
+  const handleSubmit = useMutation(async (e) => {
+    try {
+      e.preventDefault();
+
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+
+      const body = JSON.stringify(form);
+      console.log(body);
+      const response = await API.post("/login", body, config);
+
+      if (response?.status === 200) {
+        dispatch({
+          type: "LOGIN_SUCCESS",
+          payload: response.data.data,
+        });
+
+        if (response.data.data.status === "admin") {
+          navigate("/transaction");
+        } else {
+          navigate("/");
+        }
+      }
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
   return (
     <div>
       <Button className="me-2 btn-log" onClick={handleShow}>
@@ -28,13 +81,14 @@ export default function Auth() {
       <Modal show={show} onHide={handleClose}>
         <Modal.Body closebutton="true">
           <h1 className="text-login text-center mb-4">Login</h1>
-          <Form>
+          <Form onSubmit={(e) => handleSubmit.mutate(e)}>
             <Form.Control
               className="mb-3"
               type="email"
               id="email"
               name="email"
               placeholder="type your email"
+              onChange={handleChange}
             />
             <Form.Control
               className="mb-3 form-Input"
@@ -42,6 +96,7 @@ export default function Auth() {
               id="password"
               name="password"
               placeholder="type your password"
+              onChange={handleChange}
             />
             <Button type="submit" className="w-100 mb-3 btn-authlogin">
               Submit

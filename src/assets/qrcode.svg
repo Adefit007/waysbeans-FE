@@ -1,0 +1,32 @@
+<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_2_505)">
+<path d="M15.625 0H0V15.625H15.625V0ZM12.5 12.5H3.125V3.125H12.5V12.5Z" fill="black"/>
+<path d="M9.375 6.25H6.25V9.375H9.375V6.25Z" fill="black"/>
+<path d="M34.375 0V15.625H50V0H34.375ZM46.875 12.5H37.5V3.125H46.875V12.5Z" fill="black"/>
+<path d="M43.75 6.25H40.625V9.375H43.75V6.25Z" fill="black"/>
+<path d="M0 50H15.625V34.375H0V50ZM3.125 37.5H12.5V46.875H3.125V37.5Z" fill="black"/>
+<path d="M9.375 40.625H6.25V43.75H9.375V40.625Z" fill="black"/>
+<path d="M31.25 0H25V3.125H31.25V0Z" fill="black"/>
+<path d="M25 12.5H28.125V9.375H31.25V6.25H21.875V3.125H18.75V6.25V7.8125V9.375H25V12.5Z" fill="black"/>
+<path d="M21.875 12.5H18.75V15.625H21.875V12.5Z" fill="black"/>
+<path d="M31.25 15.625H28.125V18.75H18.75V21.875H31.25V15.625Z" fill="black"/>
+<path d="M3.125 28.125H6.25V25H3.125V18.75H0V31.25H3.125V28.125Z" fill="black"/>
+<path d="M9.375 18.75H6.25V21.875H9.375V18.75Z" fill="black"/>
+<path d="M18.75 31.25H25V28.125H21.875V25H15.625V18.75H12.5V25H9.375V31.25H12.5V28.125H14.0625H15.625H18.75V31.25Z" fill="black"/>
+<path d="M31.25 25H28.125V31.25H31.25V25Z" fill="black"/>
+<path d="M28.125 34.375H18.75V37.5H25V46.875H18.75V50H28.125V46.875H34.375V43.75H28.125V34.375Z" fill="black"/>
+<path d="M21.875 40.625H18.75V43.75H21.875V40.625Z" fill="black"/>
+<path d="M34.375 34.375H31.25V40.625H34.375V34.375Z" fill="black"/>
+<path d="M46.875 40.625H37.5V50H40.625V43.75H46.875V40.625Z" fill="black"/>
+<path d="M50 46.875H43.75V50H50V46.875Z" fill="black"/>
+<path d="M50 34.375H46.875V37.5H50V34.375Z" fill="black"/>
+<path d="M37.5 37.5H40.625V28.125H34.375V31.25H37.5V37.5Z" fill="black"/>
+<path d="M43.75 21.875H40.625V18.75H37.5V21.875H34.375V25H46.875V21.875H50V18.75H43.75V21.875Z" fill="black"/>
+<path d="M50 28.125H43.75V31.25H50V28.125Z" fill="black"/>
+</g>
+<defs>
+<clipPath id="clip0_2_505">
+<rect width="50" height="50" fill="white"/>
+</clipPath>
+</defs>
+</svg>

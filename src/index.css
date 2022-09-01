@@ -97,7 +97,20 @@ code {
 
 .imageProduct:hover {
   filter: brightness(150%) !important;
+  transform: scale(1.1) !important;
+  border-radius: 5px !important;
 }
 .imageHome:hover {
   filter: brightness(120%) !important;
+}
+
+.text-primer {
+  color: #613d2b;
+}
+.text-primer2 {
+  color: #895840;
+}
+
+.text-justified {
+  text-align: justify !important;
 }

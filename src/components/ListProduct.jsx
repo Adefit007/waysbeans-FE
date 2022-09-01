@@ -1,28 +1,25 @@
 import React from "react";
-import { Card, Col, Row } from "react-bootstrap";
-import { Product } from "./Dummy";
+import { Card } from "react-bootstrap";
 
-export default function ListProduct() {
+import convertRupiah from "rupiah-format";
+
+export default function ListProduct({ item }) {
   return (
     <div>
-      <Row>
-        {Product?.map((item, index) => (
-          <Col className="mb-2">
-            <Card style={{ width: "16rem" }} key={index}>
-              <Card.Img
-                variant="top"
-                src={item.image}
-                className="imageProduct"
-              />
-              <Card.Body className="text-danger bgCard">
-                <Card.Title className="fw-bold">{item.name}</Card.Title>
-                <Card.Text className="m-0 ">Rp : {item.price}</Card.Text>
-                <Card.Text className="m-0">Stock : {item.stock}</Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+      <Card style={{ width: "100%" }}>
+        <Card.Img
+          variant="top"
+          src={item.image}
+          className="imageProduct fluid"
+        />
+        <Card.Body className="text-danger bgCard">
+          <Card.Title className="fw-bold">{item.title}</Card.Title>
+          <Card.Text className="m-0 ">
+            {convertRupiah.convert(item.price)}
+          </Card.Text>
+          <Card.Text className="m-0">Stock : {item.stock}</Card.Text>
+        </Card.Body>
+      </Card>
     </div>
   );
 }
