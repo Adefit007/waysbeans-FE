@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import NavbarAuth from "../components/Navbar";
 import { API } from "../config/api";
 import convertRupiah from "rupiah-format";
@@ -37,7 +37,9 @@ export default function DetailProduct() {
             <h3 className="text-end text-primer2 mt-5">
               {convertRupiah.convert(product?.price)}
             </h3>
-            <Button className="w-100 mt-5 btn-authlogin">Add Cart</Button>
+            <Link to={"/cart"}>
+              <Button className="w-100 mt-5 btn-authlogin">Add Cart</Button>
+            </Link>
           </Col>
         </Row>
       </Container>

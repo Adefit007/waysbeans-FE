@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import NavbarAuth from "../components/Navbar";
 import imgBlank from "../assets/imgBlank.jpg";
-import imageProduct from "../assets/product1.svg";
-import waysbeanLogo from "../assets/waysbeans.svg";
-import qrCode from "../assets/qrcode.svg";
+import Transaction from "../components/Transaction";
+import { useQuery } from "react-query";
+import { API } from "../config/api";
+import { UserContext } from "../context/useContext";
 
 export default function Profile() {
   const title = "Profile";
   document.title = "WaysBeans | " + title;
 
+  const [state] = useContext(UserContext);
+
+  let { data: Profile, refetch } = useQuery("profileCache", async () => {
+    const response = await API.get("/user-profile");
+
+    return response.data.data.profile;
+  });
   return (
     <div>
       <NavbarAuth />
@@ -20,7 +28,11 @@ export default function Profile() {
             <Row>
               <Col xs={12} md={6}>
                 <img
-                  src={imgBlank}
+                  src={
+                    Profile?.image === "http://localhost:5000/uploads/"
+                      ? Profile?.image
+                      : imgBlank
+                  }
                   style={{ width: "100%", borderRadius: "8px" }}
                   className=""
                   alt=""
@@ -28,8 +40,8 @@ export default function Profile() {
               </Col>
               <Col>
                 <div className="text-primer">
-                  <h4>Name :</h4>
-                  <h4>Email :</h4>
+                  <h4>Name : {state.user.name}</h4>
+                  <h4>Email : {state.user.email}</h4>
                   <h4>Alamat :</h4>
                 </div>
               </Col>
@@ -37,40 +49,7 @@ export default function Profile() {
           </Col>
           <Col>
             <h2 className="text-primer fw-bold mb-3">My Transactions</h2>
-            <Row className="bgCard rounded py-2">
-              <Col xs={4} md={4}>
-                <img
-                  src={imageProduct}
-                  style={{ width: "100%", borderRadius: "8px" }}
-                />
-              </Col>
-              <Col xs={5} md={5}>
-                <div className="text-primer ">
-                  <h5 className="m-0">Guatemala Beans</h5>
-                  <p className="m-0">Saturday, 5 march 2020</p>
-                  <p className="m-0">Price : Rp. 300.900</p>
-                  <p className="m-0">Qty : 2</p>
-                  <p className="m-0">Subbtotal : 601.800</p>
-                </div>
-              </Col>
-              <Col xs={3} md={3}>
-                <div className="">
-                  <img
-                    src={waysbeanLogo}
-                    style={{ width: "100%" }}
-                    className=""
-                  />
-                  <img
-                    src={qrCode}
-                    style={{ width: "100%" }}
-                    className="my-1"
-                  />
-                  <p className="text-warning text-center bg-info rounded">
-                    Waiting Approve
-                  </p>
-                </div>
-              </Col>
-            </Row>
+            <Transaction />
           </Col>
         </Row>
       </Container>

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Dropdown, Image, Nav, NavDropdown } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../context/useContext";
-import profile from "../assets/profileToggle.png";
+import profile from "../assets/imgBlank.jpg";
 import profile1 from "../assets/profileVector.png";
 import logoutImg from "../assets/logout.png";
 import cart from "../assets/cart.png";
@@ -31,7 +31,7 @@ export default function NavUser() {
     <div>
       <Nav>
         <Nav.Link className="me-3 mt-2 text-danger">
-          <Link to="#" className="text-decoration-none">
+          <Link to="/cart" className="text-decoration-none">
             <div className="cart">
               <img src={cart} alt="" style={{ maxWidth: "40px" }} />
               <span className="notif" style={{ backgroundColor: "red" }}></span>
@@ -39,17 +39,20 @@ export default function NavUser() {
           </Link>
         </Nav.Link>
         <Nav.Link className="align-item-center justify-content-center me-5 pe-5 fw-bolder text-primer">
-          <NavDropdown title={profilToggle}>
-            <Dropdown.Item className="text-danger">
+          <NavDropdown title={profilToggle} className="text-primer">
+            <Dropdown.Item className="text-primer">
               <Link to="/profile" className="text-primer text-decoration-none">
                 {profileVector}
-                <span> Profile</span>
+                <span className="text-primer"> Profile</span>
               </Link>
             </Dropdown.Item>
             <Dropdown.Divider />
             <Dropdown.Item className="text-primer">
               {logoutIcon}
-              <span onClick={logout}> Logout</span>
+              <span className="text-primer" onClick={logout}>
+                {" "}
+                Logout
+              </span>
             </Dropdown.Item>
           </NavDropdown>
         </Nav.Link>
