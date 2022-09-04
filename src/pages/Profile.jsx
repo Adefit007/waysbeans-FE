@@ -13,11 +13,6 @@ export default function Profile() {
 
   const [state] = useContext(UserContext);
 
-  let { data: Profile, refetch } = useQuery("profileCache", async () => {
-    const response = await API.get("/user-profile");
-
-    return response.data.data.profile;
-  });
   return (
     <div>
       <NavbarAuth />

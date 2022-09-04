@@ -3,47 +3,62 @@ import { Container, Table } from "react-bootstrap";
 import { useQuery } from "react-query";
 import NavAdmin from "../components/NavAdmin";
 import { API } from "../config/api";
+import Rupiah from "rupiah-format";
 
 export default function Transaction() {
-  let { data: products, refetch } = useQuery("productCache", async () => {
-    const response = await API.get("/products");
-    return response.data.data;
-  });
+  const title = "Transactions";
+  document.title = "Waysbeans | " + title;
+
+  let { data: transactions, refetch } = useQuery(
+    "transactionsCache",
+    async () => {
+      const response = await API.get("/transactions");
+      return response.data.data;
+    }
+  );
+  console.log(transactions);
+
   return (
     <div>
       <NavAdmin />
       <Container className="mt-5 pt-5">
         <h1 className="text-primer my-3">Income Transaction</h1>
-        <Table responsive striped bordered hover className="text-center">
+        <Table responsive bordered hover className="text-center">
           <thead>
             <tr>
               <th>No</th>
               <th>Name</th>
               <th>Address</th>
-              <th>Post Code</th>
-              <th>Product Order</th>
+              <th>ID Order</th>
+              <th>Total</th>
               <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="align-middle">1</td>
-              <td>
-                <img
-                  src=""
-                  style={{
-                    width: "30px",
-                    height: "30px",
-                    objectFit: "cover",
-                  }}
-                  alt=""
-                />
-              </td>
-              <td className="align-middle">a</td>
-              <td className="align-middle text-truncate">b</td>
-              <td className="align-middle">c</td>
-              <td className="align-middle">d</td>
-            </tr>
+            {transactions?.map((item, index) => (
+              <tr key={index}>
+                <td className="align-middle">{index + 1}</td>
+                <td className="align-middle">{item.user.name}</td>
+                <td className="align-middle">{item.user.address}</td>
+                <td className="align-middle">{item.id}</td>
+                <td className="align-middle">{Rupiah.convert(item?.total)}</td>
+                <td
+                  className={
+                    item.status === "success"
+                      ? "success"
+                      : item.status === "cancel"
+                      ? "canceled"
+                      : item.status === "pending"
+                      ? "waiting"
+                      : item.status === "On the way"
+                      ? "ontheway"
+                      : ""
+                  }
+                >
+                  {item.status}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </Container>

@@ -1,38 +1,76 @@
 import React from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import waysbeanLogo from "../assets/waysbeans.svg";
 import qrCode from "../assets/qrcode.svg";
-import imageProduct from "../assets/product1.svg";
+import { useQuery } from "react-query";
+import { API } from "../config/api";
+import Rupiah from "rupiah-format";
 
 export default function Transaction() {
+  let { data: transactions } = useQuery("transactionsCache", async () => {
+    const response = await API.get("/user-transaction");
+    return response.data.data;
+  });
+  console.log(transactions);
   return (
-    <div>
-      <Row className="bgCard rounded py-2">
-        <Col xs={4} md={3}>
-          <img
-            src={imageProduct}
-            style={{ width: "100%", borderRadius: "8px" }}
-          />
-        </Col>
-        <Col xs={5} md={7}>
-          <div className="text-primer ">
-            <h4 className="m-0">Guatemala Beans</h4>
-            <p className="mt-2 fw-bold">Saturday, 5 march 2020</p>
-            <p className="m-0">Price : Rp. 300.900</p>
-            <p className="m-0">Qty : 2</p>
-            <p className="m-0 fw-bold">Subbtotal : 601.800</p>
-          </div>
-        </Col>
-        <Col xs={3} md={2}>
-          <div className="">
-            <img src={waysbeanLogo} style={{ width: "100%" }} className="" />
-            <img src={qrCode} style={{ width: "100%" }} className="my-1" />
-            <p className="text-warning text-center bg-info rounded">
-              Waiting Approve
-            </p>
-          </div>
-        </Col>
-      </Row>
-    </div>
+    <>
+      {transactions?.map((items, index) => (
+        <Container
+          className="p-4 overflow-auto rounded-4 mb-2"
+          style={{ backgroundColor: "#F6DADA" }}
+        >
+          <Row>
+            {items?.product?.map((data, idx) => (
+              <Col md={8} key={idx}>
+                <Row className="mb-3">
+                  <Col sm={4}>
+                    <img
+                      src={
+                        "http://localhost:5000/uploads/" + data?.product?.Image
+                      }
+                      alt="aa"
+                      style={{ width: 100 }}
+                    />
+                  </Col>
+                  <Col sm={8}>
+                    <div>
+                      <h5>{data?.product?.Title}</h5>
+                      <p>
+                        <b>Saturday</b>, <span>5 September 2022</span>{" "}
+                      </p>
+                      <p>Qty: {data?.qty}</p>
+                    </div>
+                    <div className="mt-1" style={{ fontSize: 15 }}>
+                      <p className="my-1">
+                        Price : {Rupiah.convert(data?.subtotal)}
+                      </p>
+                    </div>
+                  </Col>
+                </Row>
+              </Col>
+            ))}
+
+            <Col md={4} className="text-center">
+              <img className="w-50" src={waysbeanLogo} alt="" />
+              <br />
+              <br />
+              <img src={qrCode} alt="" />
+              <div
+                className="text-center w-75 m-auto my-3 fw-semibold"
+                style={{
+                  backgroundColor: "rgba(0, 209, 255, .3)",
+                  color: "#00D1FF",
+                }}
+              >
+                {items?.status}
+              </div>
+              <div className="text-center w-75 m-auto my-3 fw-normal">
+                Subtotal:{Rupiah.convert(items?.total)}
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      ))}
+    </>
   );
 }

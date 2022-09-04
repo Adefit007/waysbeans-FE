@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useQuery } from "react-query";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import NavbarAuth from "../components/Navbar";
 import { API } from "../config/api";
 import convertRupiah from "rupiah-format";
@@ -10,12 +10,35 @@ export default function DetailProduct() {
   const title = "Product";
   document.title = "WaysBeans | " + title;
 
+  const navigate = useNavigate();
+
   let { id } = useParams();
   let { data: product } = useQuery("productCache", async () => {
     const response = await API.get("/product/" + id);
     return response.data.data;
   });
   console.log(product);
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      const body = JSON.stringify({
+        product_id: parseInt(id),
+        qty: 1,
+        subtotal: product?.price,
+      });
+      await API.post("/cart", body, config);
+      navigate("/cart");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -38,7 +61,12 @@ export default function DetailProduct() {
               {convertRupiah.convert(product?.price)}
             </h3>
             <Link to={"/cart"}>
-              <Button className="w-100 mt-5 btn-authlogin">Add Cart</Button>
+              <Button
+                className="w-100 mt-5 btn-authlogin"
+                onClick={handleSubmit}
+              >
+                Add Cart
+              </Button>
             </Link>
           </Col>
         </Row>

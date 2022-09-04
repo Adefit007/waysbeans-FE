@@ -68,6 +68,19 @@ code {
   border-color: #613d2b !important;
 }
 
+.btn-increase {
+  background-color: white !important;
+  border-color: rgb(213, 157, 65) !important;
+  color: black !important;
+}
+
+.btn-increase:focus,
+.btn-increase:active {
+  outline: none !important;
+  box-shadow: none !important;
+  box-shadow: 0 0 0 0.2rem rgba(205, 168, 112, 0.25) !important;
+}
+
 .btn-authlogin:hover {
   background-color: #895840 !important;
   font-weight: bolder;
@@ -132,4 +145,21 @@ code {
 
 .buttonList2:focus {
   box-shadow: 0 0 0 0.2rem rgba(45, 216, 108, 0.25) !important;
+}
+
+.lines {
+  border-top: 1px solid #613d2b;
+}
+
+.success {
+  color: rgb(71, 225, 71);
+}
+.canceled {
+  color: red;
+}
+.waiting {
+  color: rgb(211, 232, 75);
+}
+.ontheway {
+  color: rgb(75, 206, 232);
 }
