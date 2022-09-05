@@ -48,7 +48,7 @@ export default function DetailProduct() {
           <Col xs={12} md={4} className="container-fluid ">
             <img
               className="rounded"
-              src={product?.Image}
+              src={product?.image}
               alt="detailProduct"
               style={{ width: "100%" }}
             />
