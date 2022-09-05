@@ -35,7 +35,7 @@ export default function LandingPages() {
       <Container className="mt-5 mb-3 container-fluid">
         <Row>
           {products?.map((item, index) => (
-            <Col className="mb-2">
+            <Col xs={12} md={3} className="mb-2">
               <Link
                 className="text-decoration-none"
                 to={state.isLogin === true ? `/detail-product/${item.id}` : ""}
