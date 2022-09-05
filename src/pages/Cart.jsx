@@ -5,6 +5,7 @@ import iconDelete from "../assets/trash.png";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "react-query";
 import { API } from "../config/api";
+import convertRupiah from "rupiah-format";
 
 export default function Cart() {
   const title = "Cart";
@@ -184,7 +185,7 @@ export default function Cart() {
                     style={{ textAlign: "end" }}
                   >
                     <p className="text-primer">
-                      {item?.qty * item?.product?.Price}
+                      {convertRupiah.convert(item?.qty * item?.product?.Price)}
                     </p>
                     <img
                       src={iconDelete}
@@ -207,7 +208,9 @@ export default function Cart() {
                 <p className="text-primer">QTY</p>
               </Col>
               <Col>
-                <p className="text-primer">{resultTotal}</p>
+                <p className="text-primer">
+                  {convertRupiah.convert(resultTotal)}
+                </p>
                 <p className="text-primer">{resultQty}</p>
               </Col>
             </Row>
@@ -217,7 +220,9 @@ export default function Cart() {
                 <p className="text-primer">Total</p>
               </Col>
               <Col>
-                <p className="text-primer">{resultTotal}</p>
+                <p className="text-primer">
+                  {convertRupiah.convert(resultTotal)}
+                </p>
               </Col>
             </Row>
             <Button
