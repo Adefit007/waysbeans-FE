@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import { API } from "../config/api";
+import { useEffect } from "react";
 
 export default function UpdateProduct() {
   let navigate = useNavigate();
@@ -22,18 +23,25 @@ export default function UpdateProduct() {
     image: "",
   });
 
-  useQuery("productCache", async () => {
+  let { data: products } = useQuery("productCache", async () => {
     const response = await API.get("/product/" + id);
-    setPreview(response.data.data.image);
-    setForm({
-      ...form,
-      title: response.data.data.title,
-      stock: response.data.data.stock,
-      price: response.data.data.price,
-      desc: response.data.data.desc,
-    });
-    setProduct(response.data.data);
+    return response.data.data;
   });
+
+  useEffect(() => {
+    if (products) {
+      setPreview(products.image);
+      setLabelName(products.image.slice(30));
+      setForm({
+        ...form,
+        title: products.title,
+        stock: products.stock,
+        price: products.price,
+        desc: products.desc,
+      });
+      setProduct(products);
+    }
+  }, [products]);
 
   const handleChange = (e) => {
     setForm({
@@ -45,6 +53,7 @@ export default function UpdateProduct() {
     if (e.target.type === "file") {
       let url = URL.createObjectURL(e.target.files[0]);
       setPreview(url);
+      setLabelName(e.target.files[0].name);
     }
   };
 
@@ -60,7 +69,7 @@ export default function UpdateProduct() {
 
       const formData = new FormData();
       if (form.image) {
-        formData.set("image", form?.image[0], form?.image[0].name);
+        formData.set("image", form?.image[0], form?.image[0]?.name);
       }
       formData.set("title", form.title);
       formData.set("stock", form.stock);

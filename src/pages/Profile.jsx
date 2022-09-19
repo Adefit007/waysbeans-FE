@@ -37,7 +37,7 @@ export default function Profile() {
                 <div className="text-primer">
                   <h4>Name : {state.user.name}</h4>
                   <h4>Email : {state.user.email}</h4>
-                  <h4>Alamat :</h4>
+                  {/* <h4>Alamat :</h4> */}
                 </div>
               </Col>
             </Row>
