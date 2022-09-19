@@ -31,7 +31,7 @@ export default function UpdateProduct() {
   useEffect(() => {
     if (products) {
       setPreview(products.image);
-      // setLabelName(products.image.slice(15));
+      setLabelName(products.image.slice(15));
       setForm({
         ...form,
         title: products.title,
