@@ -13,7 +13,7 @@ export default function ListProductAdmin() {
   const title = "List Product";
   document.title = "WayBeans | " + title;
 
-  let { data: products, refetch } = useQuery("productCache", async () => {
+  let { data: products, refetch } = useQuery("productsCache", async () => {
     const response = await API.get("/products");
     return response.data.data;
   });
