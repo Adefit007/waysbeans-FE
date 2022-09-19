@@ -80,7 +80,7 @@ export default function ListProductAdmin() {
                 <td className="align-middle">{index + 1}</td>
                 <td>
                   <img
-                    src={item?.image}
+                    src={item.image}
                     style={{
                       width: "40px",
                       height: "40px",
@@ -89,13 +89,13 @@ export default function ListProductAdmin() {
                     alt=""
                   />
                 </td>
-                <td className="align-middle">{item?.title}</td>
-                <td className="align-middle ">{item?.stock}</td>
+                <td className="align-middle">{item.title}</td>
+                <td className="align-middle ">{item.stock}</td>
                 <td className="align-middle">
-                  {convertRupiah.convert(item?.price)}
+                  {convertRupiah.convert(item.price)}
                 </td>
                 <td className="align-middle">
-                  {item?.desc.substring(0, 17)}...
+                  {item.desc.substring(0, 17)}...
                 </td>
                 <td className="align-middle">
                   <Button
