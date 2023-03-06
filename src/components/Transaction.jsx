@@ -5,6 +5,7 @@ import qrCode from "../assets/qrcode.svg";
 import { useQuery } from "react-query";
 import { API } from "../config/api";
 import Rupiah from "rupiah-format";
+import imageTrans from "../assets/notFound.webp";
 
 export default function Transaction() {
   let { data: transactions } = useQuery("transactionsCache", async () => {
@@ -13,7 +14,8 @@ export default function Transaction() {
   });
   console.log(transactions);
   return (
-    <>
+    <>{transactions?.length !== 0 ? (
+      <div>
       {transactions?.map((items, index) => (
         <Container
           className="p-4 overflow-auto rounded-4 mb-2"
@@ -69,6 +71,22 @@ export default function Transaction() {
           </Row>
         </Container>
       ))}
+      </div>
+    ) : (
+      <Col>
+          <div className="text-center ">
+            <img
+              src={imageTrans}
+              alt=""
+              className="img-fluid"
+              style={{ width: "70%" }}
+            />
+            <div className=" text-primer">
+              No data Transactions, Let's Shopping
+            </div>
+          </div>
+        </Col>
+    )}
     </>
   );
 }
