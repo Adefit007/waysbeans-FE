@@ -41,7 +41,7 @@ export default function UpdateProduct() {
       });
       setProduct(products);
     }
-  }, [products]);
+  }, [form, products]);
 
   const handleChange = (e) => {
     setForm({
