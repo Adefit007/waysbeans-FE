@@ -45,7 +45,7 @@ export default function NavUser() {
           <Link to="/cart" className="text-decoration-none">
             <div className="cart">
               <img src={cart} alt="" style={{ maxWidth: "40px" }} />
-              <span className="notif" style={{ backgroundColor: "red" }}>
+              <span className="notif" style={{ backgroundColor: "" }}>
                 {bubble.length}
               </span>
             </div>
