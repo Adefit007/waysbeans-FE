@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "react-query";
 import { API } from "../config/api";
 import convertRupiah from "rupiah-format";
+import imageTrans from "../assets/notFound.webp"
 
 export default function Cart() {
   const title = "Cart";
@@ -137,6 +138,7 @@ export default function Cart() {
       <Container className="pt-5 mt-5">
         <h1 className="text-primer fw-bold mb-3"> My Cart</h1>
         <p className="text-primer2">Review Your Order</p>
+        {cart?.length !== 0 ? (
         <Row className="justify-content-between">
           <Col md={8}>
             <div className="lines my-3" />
@@ -235,6 +237,19 @@ export default function Cart() {
             </Button>
           </Col>
         </Row>
+        ) : (
+          <div className="text-center">
+          <img
+            src={imageTrans}
+            alt=""
+            className="img-fluid"
+            style={{ width: "40%" }}
+          />
+          <div className="text-primer fw-bold">
+            No data Cart, let's Shopping
+          </div>
+        </div>
+        )}
       </Container>
     </div>
   );
