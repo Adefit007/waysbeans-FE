@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Dropdown, Image, Nav, NavDropdown } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../context/useContext";
@@ -6,6 +6,7 @@ import profile from "../assets/imgBlank.jpg";
 import profile1 from "../assets/profileVector.png";
 import logoutImg from "../assets/logout.png";
 import cart from "../assets/cart.png";
+import { API } from "../config/api";
 
 export default function NavUser() {
   const profilToggle = (
@@ -19,6 +20,16 @@ export default function NavUser() {
   const [state, dispatch] = useContext(UserContext);
 
   let navigate = useNavigate();
+
+  const [bubble, setBubble] = useState([]);
+
+  useEffect(() => {
+    API.get("/carts-id")
+      .then((res) => {
+        setBubble(res.data.data);
+      })
+      .catch((err) => console.log("error", err));
+  });
 
   const logout = () => {
     dispatch({
@@ -34,7 +45,9 @@ export default function NavUser() {
           <Link to="/cart" className="text-decoration-none">
             <div className="cart">
               <img src={cart} alt="" style={{ maxWidth: "40px" }} />
-              <span className="notif" style={{ backgroundColor: "red" }}></span>
+              <span className="notif" style={{ backgroundColor: "red" }}>
+                {bubble.length}
+              </span>
             </div>
           </Link>
         </Nav.Link>
